@@ -1,29 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+/*store the list of elements in a linked list*/
+struct lslinkedlist {
+	int lsdata;
+	struct lslinkedlist *link;
+};
+
+typedef struct lslinkedlist node;
+node *head;
 
 int main()
 {
-	int variable,size,origsize;
-	int input = 0;
-	int *ptr;
-	int *table;
-	printf("Enter the number of blocks\n");
-	scanf_s("%d",&size);
-	origsize = size;
-	ptr = (int *)__vcrt_malloc_normal(size * sizeof(int));
-	if (ptr == NULL) {
-		exit(1);
+	unsigned int lssizeoflist = 0u;
+	node *storedhead;
+	printf("Enter the size of list\n");
+	scanf_s("%d", &lssizeoflist);
+
+	head = (node *) malloc(lssizeoflist * sizeof(node));
+	storedhead = head;
+	printf("Enter the elements\n");
+
+	for (int i = 0; i < lssizeoflist; i++) {
+		scanf_s("%d", &head->lsdata);
+		printf("Successfully stored at %d\n", &head->lsdata);
+		head->link = head++;
 	}
-	printf("\nAddress of the first byte = 0x%x\n", *ptr);
-	printf("Enter the numbers\n");
-	for (table = ptr; table < (ptr + size); table++) {
-		scanf_s("%d", table);
+	head->link = NULL;
+	
+	printf("\n------Completed----------\n");
+
+	//do {
+	//	printf("Elements = %d\n", head->lsdata);
+	//	head++;
+	//} while (head->link->link != NULL);
+
+	for (int j = 0; j < lssizeoflist; j++) {
+		printf("Data[%d] = %d", j, storedhead->lsdata);
+		if(storedhead->link->link == NULL)
+			printf("Data[%d] = %d", j, storedhead->link->lsdata);
+		storedhead++;
 	}
-	printf("first step COMPLETED\n");
-	for (table = ptr+size-1; table >= ptr; table--) {
-		printf("%d - 0x%d\n", *table, table);
-	}
+
 	getchar();
 	getchar();
 	return 0;
