@@ -3,43 +3,50 @@
 #include <malloc.h>
 /*store the list of elements in a linked list*/
 struct lslinkedlist {
-	int lsdata;
-	struct lslinkedlist *link;
+	unsigned int index_u8;
+	unsigned int lsdata;
+	struct lslinkedlist *next;
+	struct lslinkedlist *prev;
 };
 
 typedef struct lslinkedlist node;
 node *head;
-
 int main()
 {
-	unsigned int lssizeoflist = 0u;
-	node *storedhead;
-	printf("Enter the size of list\n");
-	scanf_s("%d", &lssizeoflist);
+	node *prevnode;
+	node *currentnode;
+	unsigned int listsize=0;
+	printf("Enter the number of lists");
+	scanf_s("%u",&listsize);
+	head = (node *)malloc(listsize * sizeof(node));
+	head->prev = NULL;
+	prevnode = head;
+	currentnode = head;
+	for (int i=0;i<listsize;i++)
+	{
+		printf("Enter the data for %dth node \n", i);
+		scanf_s("%u", &(currentnode->lsdata));
+		currentnode->index_u8 = i;
+		printf("Successfully stored at %u\n", &currentnode->lsdata);
 
-	head = (node *) malloc(lssizeoflist * sizeof(node));
-	storedhead = head;
-	printf("Enter the elements\n");
+		if(i==0){
+		}else{
+			currentnode->prev = prevnode;
+		}
 
-	for (int i = 0; i < lssizeoflist; i++) {
-		scanf_s("%d", &head->lsdata);
-		printf("Successfully stored at %d\n", &head->lsdata);
-		head->link = head++;
+		prevnode = currentnode;
+
+		if (i == (listsize - 1)) {
+			currentnode->next = NULL;
+		}
+		else{
+			currentnode->next = currentnode++;
+		}
 	}
-	head->link = NULL;
-	
-	printf("\n------Completed----------\n");
-
-	//do {
-	//	printf("Elements = %d\n", head->lsdata);
-	//	head++;
-	//} while (head->link->link != NULL);
-
-	for (int j = 0; j < lssizeoflist; j++) {
-		printf("Data[%d] = %d", j, storedhead->lsdata);
-		if(storedhead->link->link == NULL)
-			printf("Data[%d] = %d", j, storedhead->link->lsdata);
-		storedhead++;
+	currentnode = head;
+	for (int i = 0; i < listsize; i++) {
+		printf("|%2.2u |%2.2u |%10.10d |%10.10d|\n", currentnode->index_u8, currentnode->lsdata, currentnode->prev, currentnode->next);
+			currentnode++;
 	}
 
 	getchar();
