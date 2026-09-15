@@ -17,6 +17,8 @@ Write Bit: Write a macro to modify a specific bit at a given position in a regis
 // Question: Write a macro to create a bitmask of a specific length starting at a given bit position.
 #define GET_MASK(pos, len) (((1U << (len)) - 1U) << (pos))
 
+// TBD
+
 // 7. Clear Field
 // Question: Write a macro to clear a contiguous field of bits of a specified length starting at a given position in a register.
 #define CLEAR_FIELD(reg, pos, len) \
