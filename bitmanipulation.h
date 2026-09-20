@@ -1,16 +1,16 @@
-Set Bit: Write a macro to set a specific bit at a given position in a register. position ranges from 0 to 32
+//Set Bit: Write a macro to set a specific bit at a given position in a register. position ranges from 0 to 32
 #define SETBIT(reg,pos) (reg |= (1U << (pos)))
 
-Clear Bit: Write a macro to clear a specific bit at a given position in a register.
+//Clear Bit: Write a macro to clear a specific bit at a given position in a register.
 #define CLEARBIT(reg,pos) (reg &= ~(1U << (pos))
 
-Toggle Bit: Write a macro to toggle or flip a specific bit at a given position in a register.
+//Toggle Bit: Write a macro to toggle or flip a specific bit at a given position in a register.
 #define TOGGLEBIT(reg,pos) (reg ^= (1U << (pos))
 
-Read Bit: Write a macro to read the value (0 or 1) of a specific bit at a given position in a register.
+//Read Bit: Write a macro to read the value (0 or 1) of a specific bit at a given position in a register.
 #define READPOS(reg,pos) (((reg) >> (pos)) & 1U)
 
-Write Bit: Write a macro to modify a specific bit at a given position in a register to a targeted value (0 or 1).
+//Write Bit: Write a macro to modify a specific bit at a given position in a register to a targeted value (0 or 1).
 #define WRITE_BIT(reg, pos, val) ((CLEARBIT((reg, pos))) | ((val) << (pos)))
   
 // 6. Get Mask
